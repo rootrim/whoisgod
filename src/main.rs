@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::env;
 use std::io;
 
@@ -46,18 +47,23 @@ fn print_help() {
     eprintln!("  -v, --version                Print version");
 }
 
-fn islam() {
-    println!("Allah");
-}
-
-fn christianity() {
-    println!("God / The Holy Trinity: Father, Son, Holy Spirit");
-}
-
 fn print_god(religion: &str) {
-    match religion.to_lowercase().as_str() {
-        "islam" => islam(),
-        "christianity" => christianity(),
-        _ => print_help(),
-    };
+    let religions = build_religions();
+    match religions.get(religion.to_lowercase().as_str()) {
+        Some(god) => println!("{}", god),
+        None => {
+            eprintln!("error: unknown religion '{}'", religion);
+            std::process::exit(2);
+        }
+    }
+}
+
+fn build_religions() -> HashMap<&'static str, &'static str> {
+    let mut map = HashMap::new();
+    map.insert("islam", "Allah");
+    map.insert(
+        "christianity",
+        "God / The Holy Trinity: Father, Son, Holy Spirit",
+    );
+    map
 }

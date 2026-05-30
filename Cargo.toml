@@ -1,7 +1,10 @@
 [package]
 name = "whoisgod"
-version = "1.0.0"
+version = "1.1.0"
 edition = "2024"
+authors = ["trim <omuaz01@gmail.com>"]
+description = "A cli utility which makes you remember the God"
+license = "WTFPL"
 
 [target.x86_64-unknown-linux-gnu]
 linker = "mold"

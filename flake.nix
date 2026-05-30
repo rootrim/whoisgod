@@ -21,7 +21,7 @@
       in {
         packages.default = naersk'.buildPackage {
           pname = "whoisgod";
-          version = "1.0.0";
+          version = (fromTOML (builtins.readFile ./Cargo.toml)).package.version;
           src = ./.;
 
           nativeBuildInputs = with pkgs; [pkg-config mold];
